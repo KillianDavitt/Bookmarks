@@ -1,0 +1,21 @@
+div.newhabit {
+    width:100%;
+}
+
+div.habitpanel {
+    width:100%;
+}
+
+div.halfwidth {
+    width:50%;
+}
+
+div.stat {
+    width: 95%;
+    height:400px;
+}
+
+td{
+ text-align:center;
+ vertical-align:middle;
+}
