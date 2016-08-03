@@ -1,24 +1,19 @@
-from flask_login import login_user, logout_user, current_user, login_required, LoginManager
-from datetime import datetime, timedelta, date
-import time
-from flask import render_template, flash, redirect, session, url_for, request
+from datetime import datetime
+from flask import render_template, redirect, request
 from app import app, db, lm
 from .models import User, Bookmark
 
+from flask_login import login_user, logout_user, current_user, login_required
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    
-
+    """ Run of the mill login view
+    """
     if request.method == "POST":
-        
         password = request.form['password']
-
+        
         if password != '':
-
             user = User.query.filter_by(name="killian").first()
-
             if password == user.password:
-                #login
                 login_user(user, remember=True)
                 return redirect('/')
 
@@ -58,7 +53,7 @@ def new_bookmark():
 
     if url != "":
         
-        new_bookmark = Bookmark(url=url)
+        new_bookmark = Bookmark(url=url, creation_datetime=datetime.now())
         db.session.add(new_bookmark)
         db.session.commit()
 
