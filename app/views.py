@@ -20,15 +20,25 @@ def login():
             if password == user.password:
                 #login
                 login_user(user, remember=True)
-                return redirect('/log')
+                return redirect('/')
 
     return render_template('login.html')
 
-@app.route('/bookmark_list')
+@app.route('/bookmark_list', methods=['GET', 'POST'])
+@app.route('/')
 @login_required
 def bookmark_list():
     
-    bookmark_list = Bookmark.query.all()
+    bookmarks_list = None
+
+    if request.method == 'POST':
+        
+        term = request.form['search']
+
+        bookmark_list = Bookmark.query.filter(Bookmark.url.like("%" + term + "%")).all()
+
+    else:
+        bookmark_list = Bookmark.query.all()
 
 
     return render_template('bookmark_list.html', bookmark_list=bookmark_list)
