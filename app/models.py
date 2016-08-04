@@ -26,3 +26,6 @@ class Bookmark(db.Model):
 
     creation_datetime = db.Column(db.DateTime)
 
+class Tag(db.Model):
+    tag_id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(20))
